@@ -9,16 +9,42 @@ namespace Tarea_2
     {
         static void Main(string[] args)
         {
-            List<EmployeeDTO> empleados = new EmployeeSC()
+            EmployeeSC employeeSC = new EmployeeSC();
+
+            //Consulta orignial reescrita.
+            List<EmployeeBasicDataDTO> empleados = employeeSC
                 .GetAllEmployees()
-                .Select(s => new EmployeeDTO()
-                {
-                    Nombre = s.FirstName,
-                    Apellido = s.LastName,
-                    Puesto = s.Title,
-                    Telefono = s.HomePhone
-                }
-                ).ToList();
+                .Select(employee => new EmployeeBasicDataDTO(employee))
+                .ToList();
+
+
+            #region Liskov Substitution Principle
+
+            EmployeeDTO basicInfoEmployee = new EmployeeBasicDataDTO()
+            {
+                Nombre = "Pedro",
+                Apellido = "Hernandez",
+                Puesto = "Programador"
+            };
+
+            EmployeeDTO contactInfoEmployee = new EmployeeContactDataDTO()
+            {
+                Nombre = "Melisa",
+                Apellido = "Perez",
+                Ciudad = "Monterrey",
+                Pais = "México",
+                Direccion = "Anáhuac",
+                Telefono = "8182838485"
+            };
+
+            #endregion
+
+            #region Open-Closed
+
+            employeeSC.AddNewEmployee(basicInfoEmployee);
+            employeeSC.AddNewEmployee(contactInfoEmployee);
+
+            #endregion
         }
     }
 }

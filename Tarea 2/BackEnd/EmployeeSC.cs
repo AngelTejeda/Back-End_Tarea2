@@ -29,14 +29,7 @@ namespace Tarea_2.BackEnd
         {
             try
             {
-                Employee dataBaseEmployee = new Employee()
-                {
-                    FirstName = newEmployee.Nombre,
-                    LastName = newEmployee.Apellido,
-                    Title = newEmployee.Puesto,
-                    HomePhone = newEmployee.Telefono,
-                    HireDate = DateTime.Today
-                };
+                Employee dataBaseEmployee = newEmployee.GetDataBaseEmployeeObject();
 
                 dbContext.Employees.Add(dataBaseEmployee);
 
@@ -54,10 +47,7 @@ namespace Tarea_2.BackEnd
             {
                 Employee dataBaseEmployee = GetEmployeeById(id);
 
-                dataBaseEmployee.FirstName = modifiedEmployee.Nombre;
-                dataBaseEmployee.LastName = modifiedEmployee.Apellido;
-                dataBaseEmployee.Title = modifiedEmployee.Puesto;
-                dataBaseEmployee.HomePhone = modifiedEmployee.Telefono;
+                modifiedEmployee.ModifyDataBaseEmployee(dataBaseEmployee);
 
                 dbContext.SaveChanges();
             }
