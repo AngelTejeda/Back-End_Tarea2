@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Tarea_2.BackEnd;
+using Tarea_2.DataAccess;
 using Tarea_2.Models;
 
 namespace Tarea_2
@@ -11,7 +12,7 @@ namespace Tarea_2
         {
             EmployeeSC employeeSC = new EmployeeSC();
 
-            //Consulta orignial reescrita.
+            //Consulta original reescrita.
             List<EmployeeBasicDataDTO> empleados = employeeSC
                 .GetAllEmployees()
                 .Select(employee => new EmployeeBasicDataDTO(employee))
